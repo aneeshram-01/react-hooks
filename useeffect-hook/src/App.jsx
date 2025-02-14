@@ -26,8 +26,8 @@ export function App() {
       </div>
       <h1>{resourceType}</h1>
       {/* Display fetched data */}
-      {items.map((item, index) => {
-        return <pre key={index}>{JSON.stringify(item, null, 2)}</pre>; // Adding 'key' to prevent React warnings
+      {items.map((item) => {
+        return <pre>{JSON.stringify(item)}</pre>;
       })}
     </>
   );
