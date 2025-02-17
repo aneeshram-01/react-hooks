@@ -1,50 +1,67 @@
-useRef Hook Example
+# useRef Hook Example
 
-This project demonstrates the usage of the useRef hook in React, focusing on best practices for accessing DOM elements and persisting values across renders without causing re-renders.
+This project demonstrates the usage of the `useRef` hook in React, focusing on best practices for managing references to DOM elements and persisting values across renders without causing re-renders.
 
-📌 Features
+## 📌 Features
+- **Direct DOM Manipulation**: Allows direct interaction with DOM elements without causing re-renders.
+- **Preserving Values Across Renders**: Stores values that persist between renders without triggering re-renders.
+- **Avoiding Unnecessary State Updates**: Helps avoid unnecessary re-renders by using refs instead of state.
 
-Direct DOM Manipulation: Use useRef to interact with DOM elements, such as focusing an input field.
+## 🔹 Key Learnings
 
-Persisting Values Across Renders: Store values without triggering re-renders.
+### 1️⃣ Using `useRef` for Direct DOM Manipulation
+The `useRef` hook can be used to reference a DOM element and interact with it directly:
+```tsx
+import { useRef } from "react";
 
-Tracking Previous State: Use useRef inside useEffect to retain previous state values.
+function App() {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-🔹 Key Learnings
+  function focus() {
+    if (inputRef.current) {
+      inputRef.current.focus(); // Sets focus to the input field
+      inputRef.current.value = "Some value"; // Correct way to update ref values
+    }
+  }
 
-1️⃣ Using useRef for DOM Manipulation
-
-One common use of useRef is accessing and modifying DOM elements directly.
-
-const inputRef = useRef();
-
-function focus() {
-  inputRef.current.focus(); // Correct way to focus the input field
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focus}>Focus</button>
+    </>
+  );
 }
+```
+### ⚠️ What to Avoid
+- **Incorrect use of refs**: `useRef` should not be used for rendering logic. It does not trigger re-renders.
+- **Incorrect property access**: Ensure that `.current` is checked before accessing properties.
 
-return <input ref={inputRef} />;
+---
+### 2️⃣ Using `useRef` to Persist Values Across Renders
+Unlike state, `useRef` does not trigger a re-render when its value is updated. This makes it useful for storing previous state values:
+```tsx
+import { useEffect, useRef, useState } from "react";
 
-✅ useRef allows direct interaction with a DOM element.
-❌ Avoid modifying inputRef.current.value manually—it bypasses React’s controlled state management.
+function App() {
+  const [name, setName] = useState("");
+  const prevName = useRef("");
 
-2️⃣ Using useRef to Track Previous State
+  useEffect(() => {
+    prevName.current = name; // Stores the previous name
+  }, [name]);
 
-useRef can persist values between renders without causing a re-render.
-
-const prevName = useRef("");
-
-useEffect(() => {
-  prevName.current = name; // Store the previous value of 'name'
-}, [name]);
-
-✅ The value inside useRef.current persists between renders.
-✅ Unlike useState, updating a useRef value does not cause a component re-render.
-
-🔹 Best Practices
-
-✅ Use useRef for DOM references and tracking mutable values across renders.
-✅ Combine useRef with useEffect when tracking previous state.
-❌ Do not use useRef to update state, as changes won’t cause re-renders.
+  return (
+    <>
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <div>My name is {name} and it used to be {prevName.current}</div>
+    </>
+  );
+}
+```
+### ⚠️ What to Avoid
+- **Using refs instead of state**: `useRef` should not be used to hold values that affect rendering. State should be used instead.
+- **Forgetting to update refs**: Unlike state, refs **do not trigger re-renders**, so they must be updated manually inside effects.
 
 ## 📄 Common Documentation
 For installation instructions and an overview of the entire **Course**, refer to the main [README.md](../README.md) in the root folder.
+
