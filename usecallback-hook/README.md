@@ -41,17 +41,17 @@ Below is a flowchart explaining how `useCallback` optimizes function references 
 
 ```mermaid
 graph TD
-  A[User Interaction] --> B[Changes `number`]
-  B --> C[`App` re-renders ✅]
-  C --> D[`getItems` reference changes ✅]
-  D --> E[`List` re-renders ✅ (because `getItems` is a dependency)]
-  E --> F[`Updating Items` logs in console ✅]
+  A[User Interaction] --> B[Changes number]
+  B --> C[App re-renders ✅]
+  C --> D[getItems reference changes ✅]
+  D --> E[List re-renders ✅ because getItems is a dependency]
+  E --> F[Updating Items logs in console ✅]
   
-  A --> G[Toggles `theme`]
-  G --> H[Only `App` re-renders ✅]
-  H --> I[`getItems` reference remains the same ✅]
-  I --> J[`List` does NOT re-render ✅]
-  J --> K[No `Updating Items` log in console ✅]
+  A --> G[Toggles theme]
+  G --> H[Only App re-renders ✅]
+  H --> I[getItems reference remains the same ✅]
+  I --> J[List does NOT re-render ✅]
+  J --> K[No Updating Items log in console ✅]
   
   A --> L[No state change]
   L --> M[No re-render ❌]
