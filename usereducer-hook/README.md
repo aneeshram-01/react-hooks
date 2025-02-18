@@ -37,8 +37,8 @@ This flowchart explains how **user actions trigger state updates** in the counte
 
 ```mermaid
 graph TD;
-  User["User Clicks Button"] -->|"+ Button"| DispatchIncrement["Dispatch(INCREMENT)"];
-  User -->|"- Button"| DispatchDecrement["Dispatch(DECREMENT)"];
+  User["User Clicks Button"] -->|"Increment Button (+)"| DispatchIncrement["Dispatch(INCREMENT)"];
+  User -->|"Decrement Button (-)"| DispatchDecrement["Dispatch(DECREMENT)"];
   
   DispatchIncrement --> ReducerIncrement["Reducer Updates State: count +1"];
   DispatchDecrement --> ReducerDecrement["Reducer Updates State: count -1"];
