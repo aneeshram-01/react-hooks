@@ -1,14 +1,15 @@
 # useTransition Hook Example
 
+
 This project demonstrates the usage of the `useTransition` hook in React, focused on optimizing the performance of heavy computations and ensuring UI responsiveness during state updates.
 
-📌 Features
+## 📌 Features
 
 -   **Deferring Expensive Computations**: Allows React to prioritize more urgent updates (like user input) while deferring non-critical ones (like rendering a large list).
 -   **Smooth User Experience**: Ensures the UI remains interactive by showing a loading state during heavy computations.
 -   **Optimized Rendering**: Prevents blocking renders when large datasets are being processed.
 
-🔹 Key Learnings
+## 🔹 Key Learnings
 
 ### 1️⃣ Using `useTransition` to Defer Expensive Updates
 
@@ -63,6 +64,5 @@ CopyEdit
 -   **Visual Feedback:** Always provide feedback (like a loading message) during deferred updates, so users are aware that background work is happening.
 -   **Avoid Overuse:** Don't wrap every state update in `useTransition`. Use it selectively for performance bottlenecks.
 
-📄 Common Documentation
-
+## 📄 Common Documentation
 For installation instructions and an overview of the entire **Course**, refer to the main [README.md](../README.md) in the root folder.
